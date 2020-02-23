@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-counter',
@@ -6,9 +7,18 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class CounterComponent {
 
-  @Output() counterEmitter = new EventEmitter<number>();
+  public form: FormGroup;
 
   counter = 0;
+
+  constructor(private fb: FormBuilder) {
+    this.form = fb.group({
+      login: ['', Validators.required],
+      email: ['']
+    });
+  }
+
+  @Output() counterEmitter = new EventEmitter<number>();
 
  increment() {
    this.counter++;
